@@ -44,6 +44,8 @@ public class SignInActivity extends AppCompatActivity {
         btnStart = findViewById(R.id.btnActivitySignInStart);
         progress = findViewById(R.id.pbActivitySignIn);
 
+        btnStart.setText(BuildConfig.GITHUB_CLIENT_ID);
+
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +53,7 @@ public class SignInActivity extends AppCompatActivity {
                         .appendPath("login")
                         .appendPath("oauth")
                         .appendPath("authorize")
-                        .appendQueryParameter("client_id", BuildConfig.GITHUB_CLIENT_ID)
+                        .appendQueryParameter("client_id", "725cbd3d1b68972003e1")
                         .build();
 
                 CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
@@ -89,8 +91,9 @@ public class SignInActivity extends AppCompatActivity {
     private void getAccessToken(@NonNull String code) {
         showProgress();
 
-        accessTokenCall = api.getAccessToken(
-                BuildConfig.GITHUB_CLIENT_ID, BuildConfig.GITHUB_CLIENT_SECRET, code);
+        //accessTokenCall = api.getAccessToken(BuildConfig.GITHUB_CLIENT_ID, BuildConfig.GITHUB_CLIENT_SECRET, code);
+
+        accessTokenCall = api.getAccessToken("725cbd3d1b68972003e1", "05fffb0d85a6f2f389cfc874657bf3da34d7b6d1", code);
 
         accessTokenCall.enqueue(new Callback<GithubAccessToken>() {
             @Override
